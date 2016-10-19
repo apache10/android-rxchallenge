@@ -1,5 +1,7 @@
 package com.example.gaurav.source.rest;
 
+import com.example.gaurav.source.model.ShipInfoResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
