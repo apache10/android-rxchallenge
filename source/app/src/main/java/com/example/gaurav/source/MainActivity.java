@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     SpaceApi(page+1);
                 else {
                     Log.d("Response Size", "" + AllResults.get(0).getName());
-                    //sortArray();
+                    sortArray();
                     initRecycler();
                 }
             }
@@ -55,14 +55,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ShipInfoResponse> call, Throwable t) {
                 t.printStackTrace();
-
                 Log.d("Response ship", "Error");
             }
         });
 
     }
 
+    public void sortArray(){
+        Collections.sort( AllResults, new Comparator<ShipInfo>() {
+            @Override
+            public int compare(ShipInfo a, ShipInfo b) {
+                long valA=0;
+                long valB=0;
 
+                try {
+                    valA = Long.parseLong(a.getCost());
+                    valB = Long.parseLong(b.getCost());
+                }
+                catch (Exception e) {
+                    //do something
+                }
+                if(valA>valB)
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+    }
 
     void initRecycler(){
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
